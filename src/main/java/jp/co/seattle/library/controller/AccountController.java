@@ -62,7 +62,7 @@ public class AccountController {
 				// DBeaverに反映
 				userInfo.setPassword(password);
 				usersService.registUser(userInfo);
-				model.addAttribute("bookList", booksService.getBookList());
+				
 				// 新規会員登録ができて、ログイン画面に遷移
 				return "login";
 			} else {
