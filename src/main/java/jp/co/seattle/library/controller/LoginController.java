@@ -44,26 +44,13 @@ public class LoginController {
             Model model) {
 
         // TODO 下記のコメントアウトを外してサービスクラスを使用してください。
-    	//UserInfo クラス　select
-              UserInfo selectedUserInfo = usersService.selectUserInfo(email, password);
+        //        UserInfo selectedUserInfo = usersService.selectUserInfo(email, password);
 
         // TODO パスワードとメールアドレスの組み合わせ存在チェック実装
-        //protected Connection conn = null;
-        //データが入ってきたらログイン可能、データが入らなかったら
-
-
-
-}
 
         // 本の情報を取得して画面側に渡す
         model.addAttribute("bookList", booksService.getBookList());
         return "home";
 
     }
-    
-    //DBを取ってくる処理、照合
-    //存在しないときにサーバー実行して、その文言にエラーの表示
-    //ログインできた時に一蘭画面に遷移
-    
-    
 }
