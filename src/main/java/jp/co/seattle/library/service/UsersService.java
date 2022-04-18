@@ -1,3 +1,4 @@
+//ユーザ情報共有サービス（usersテーブルにアクセスする）
 package jp.co.seattle.library.service;
 
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class UsersService {
                 + userInfo.getEmail()
                 + "','"
                 + userInfo.getPassword()
-                + "',now(),now()" + ")";
+                + "',now(),now()" + ")"; 
 
         jdbcTemplate.update(sql);
     }
@@ -44,10 +45,16 @@ public class UsersService {
      */
     public UserInfo selectUserInfo(String email, String password) {
         // TODO SQL生成
-        String sql = "";
-
+        String sql = "select email,password from users where email = '" + email + "' and password = '"+ password +"'";
+        
+        try {
+        //SQLの実行ボタンを押してくれる処理、正しい処理、やりたい処理
         UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
         return selectedUserInfo;
+        } catch (Exception e) {
+        	//例外が起こった時の処理
+        return null;
+        }
 
     }
 
