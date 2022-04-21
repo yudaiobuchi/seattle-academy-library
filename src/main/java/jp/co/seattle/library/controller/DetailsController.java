@@ -1,3 +1,5 @@
+//詳細情報機能業務ロジック
+
 package jp.co.seattle.library.controller;
 
 import java.util.Locale;
