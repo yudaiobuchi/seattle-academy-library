@@ -62,20 +62,17 @@ public class AccountController {
 				// DBeaverに反映
 				userInfo.setPassword(password);
 				usersService.registUser(userInfo);
-				
+
 				// 新規会員登録ができて、ログイン画面に遷移
 				return "login";
 			} else {
-				model.addAttribute("errorPassword","パスワードと確認用パスワードが一致していません。");
+				model.addAttribute("errorPassword", "パスワードと確認用パスワードが一致していません。");
 				return "createAccount";
 			}
 		} else {
-			model.addAttribute("errorPassword","パスワード半角英数8文字以上です。");
-			//createPsでcreteリンク
+			model.addAttribute("errorPassword", "パスワード半角英数8文字以上です。");
 			return "createAccount";
-			//createアカウント
 		}
 	}
 
-	
 }

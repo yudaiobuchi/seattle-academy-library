@@ -72,7 +72,9 @@ public class BooksService {
 	}
 
 	/**
-	 * 書籍リストを削除する
+	 * 書籍を削除する
+	 * 
+	 * @param bookId 書籍ID
 	 */
 	public void deleteBook(int bookId) {
 		String sql = "DELETE FROM books WHERE id = " + bookId + ";";
