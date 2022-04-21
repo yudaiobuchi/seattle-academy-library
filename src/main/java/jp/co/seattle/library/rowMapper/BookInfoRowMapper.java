@@ -16,7 +16,7 @@ public class BookInfoRowMapper implements RowMapper<BookInfo> {
         // Query結果（ResultSet rs）を、オブジェクトに格納する実装
         BookInfo bookInfo = new BookInfo();
 
-        // bookInfoの項目と、取得した結果(rs)のカラムをマッピングする
+        // bookInfoの項目と、取得した結果(rs)のカラムをマッピング（何かと何かを関連づけること）する
         bookInfo.setBookId(rs.getInt("id"));
         bookInfo.setTitle(rs.getString("title"));
         bookInfo.setThumbnail(rs.getString("thumbnail_url"));

@@ -71,7 +71,9 @@ public class AccountController {
 			}
 		} else {
 			model.addAttribute("errorPassword","パスワード半角英数8文字以上です。");
+			//createPsでcreteリンク
 			return "createAccount";
+			//createアカウント
 		}
 	}
 
