@@ -29,10 +29,10 @@ public class BookDetailsInfo {
     private String thumbnailUrl;
 
     private String thumbnailName;
-
+    
     public BookDetailsInfo() {
-
-    }
+		
+	}
 
     public BookDetailsInfo(int bookId, String title, String author, String publisher, String publishDate, String ISBN, String description,
             String thumbnailUrl, String thumbnailName) {
