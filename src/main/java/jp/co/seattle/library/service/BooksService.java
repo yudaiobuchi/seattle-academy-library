@@ -73,6 +73,31 @@ public class BooksService {
 	}
 
 	/**
+	 * 書籍情報を更新する 編集画面
+	 *
+	 * @param
+	 */
+	public void updatebookInfo(BookDetailsInfo bookInfo) {
+		String sql;
+		if (bookInfo.getThumbnailUrl() != null) {
+			sql = "UPDATE books SET title = " + "'" + bookInfo.getTitle() + "'" + "," + "author =" + "'"
+					+ bookInfo.getAuthor() + "'" + "," + "publisher =" + "'" + bookInfo.getPublisher() + "'" + ","
+					+ "publish_date =" + "'" + bookInfo.getPublishDate() + "'" + "," + "isbn =" + "'"
+					+ bookInfo.getISBN() + "'" + "," + "description =" + "'" + bookInfo.getDescription() + "'" + ","
+					+ "thumbnail_url =" + "'" + bookInfo.getThumbnailUrl() + "'" + "where id =" + bookInfo.getBookId()
+					+ ";";
+		} else {
+			sql = "UPDATE books SET title = " + "'" + bookInfo.getTitle() + "'" + "," + "author =" + "'"
+					+ bookInfo.getAuthor() + "'" + "," + "publisher =" + "'" + bookInfo.getPublisher() + "'" + ","
+					+ "publish_date =" + "'" + bookInfo.getPublishDate() + "'" + "," + "isbn =" + "'"
+					+ bookInfo.getISBN() + "'" + "," + "description =" + "'" + bookInfo.getDescription() + "'"
+					+ "where id =" + bookInfo.getBookId() + ";";
+		}
+		jdbcTemplate.update(sql);
+
+	}
+
+	/**
 	 * 書籍を削除する
 	 * 
 	 * @param bookId 書籍ID
@@ -88,12 +113,12 @@ public class BooksService {
 	 * ＠return 最新の書籍ID
 	 */
 	public int getMaxId() {
-        //データ選択
+		// データ選択
 		String sql = "SELECT MAX(id) FROM books";
-        //データの取得
+		// データの取得&変数に格納
 		int bookId = jdbcTemplate.queryForObject(sql, Integer.class);
-		
-        return bookId;
+		// データを格納した変数を結果として返す
+		return bookId;
 	}
 
 }
