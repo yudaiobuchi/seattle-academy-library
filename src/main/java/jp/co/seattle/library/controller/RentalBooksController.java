@@ -31,33 +31,25 @@ public class RentalBooksController {
 	//@RequestParamでname属性を取得
 	//rentalBook作業スペースを作成
 	//@RequestParam"bookId"でブラウザで入力されたデータをint型のbookIdに入れている。
-	//@RequestParam"bookId"→int bookId
-	//=実際のIDの取得　
+	//@RequestParam"bookId"→int bookId	=実際のIDの取得　
 	public String rentalBook(Locale locale,@RequestParam("bookId") int bookId, Model model) {
-		//
-		
-		
-		//書籍が貸し出されていなかったら、 = rentalsにその本の入っていなかったら　
-		//→　詳細画面にある書籍をrentals登録、それを引っ張ってきて、画面に表示
-		//rentBookで書籍の登録
-		//
-		//書籍が貸し出されていたら、= すでにrentalsに入っていたら、→ id = rentid → 貸出済
-		//model.addAttribute = 画面に表示
 		//書籍情報をrentalBookIdに代入
 		//書籍情報　＝　rentalbooksService.rentBook(bookId);
+		//rentBookで書籍の登録		
+		//書籍が貸し出されていなかったら、rentalbooksに登録
+		//書籍が貸し出されていたら、= すでにrentalbooksに入っていたら、貸出済メッセージ
+		//model.addAttribute = 画面に表示
+		//どちらの場合も、書籍情報を詳細画面に表示し、詳細画面に返す
 		int rentalBookId = rentalbooksService.getBookInfo(bookId);
 		
 		if (rentalBookId == 0) {
 			rentalbooksService.rentBook(bookId);
-			model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-			
-			return "details";
 		} else {
 			model.addAttribute("rentErrorMessage", "貸出済です");
-			model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-			
-			return "details";
 		}
+		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+		
+		return "details";
 	}
 }
 

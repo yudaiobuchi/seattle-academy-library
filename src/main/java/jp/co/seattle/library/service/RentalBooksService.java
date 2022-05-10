@@ -46,7 +46,6 @@ public class RentalBooksService {
 	 * @param bookId 書籍情報
 	 * 
 	 * Insert into テーブル名　
-	 * @return 
 	 */
 	public void rentBook(int bookId) {
 
