@@ -41,7 +41,7 @@ public class RentalBooksService {
 	}
 
 	/**
-	 * 書籍をrentalsに登録する
+	 * 書籍をrentalbooksに登録する
 	 *
 	 * @param bookId 書籍情報
 	 * 
@@ -54,5 +54,19 @@ public class RentalBooksService {
 		jdbcTemplate.update(sql);
 		
 	}
+	
+	/**
+	 * 書籍をrentalbooksから削除
+	 * 
+	 * @param bookId 書籍ID
+	 */
+	public void deleteBook(int bookId) {
+		String sql = "DELETE FROM rentalbooks WHERE rent_id = " + bookId + ";";
+		jdbcTemplate.update(sql);
+	}
+	
+
+	
+	
 
 }
