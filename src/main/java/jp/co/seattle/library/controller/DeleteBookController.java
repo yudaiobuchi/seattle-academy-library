@@ -14,17 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.seattle.library.service.BooksService;
+import jp.co.seattle.library.service.RentalBooksService;
 
 /**
  * 削除コントローラー
  */
-@Controller //APIの入り口
+@Controller // APIの入り口
 public class DeleteBookController {
-    final static Logger logger = LoggerFactory.getLogger(DeleteBookController.class);
+	final static Logger logger = LoggerFactory.getLogger(DeleteBookController.class);
 
-    @Autowired
-    private BooksService booksService;
-    /**
+	@Autowired
+	private BooksService booksService;
+
+	@Autowired
+	private RentalBooksService rentalBooksService;
+
+	/**
      * 対象書籍を削除する
      *
      * @param locale ロケール情報
@@ -39,10 +44,24 @@ public class DeleteBookController {
             @RequestParam("bookId") Integer bookId,
             Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
+
+        int rentalBookId = rentalBooksService.getBookInfo(bookId);
+        //rentalBooksにデータが入っていなければ
+        if ( rentalBookId == 0){   	
+        	//データベースのbooksテーブルから書籍の削除
+        	 booksService.deleteBook(bookId);
+             model.addAttribute("bookList", booksService.getBookList());
+             return "home";
+        } else {
+        	//貸出中だから書籍を削除できないというメッセージ表示
+        	model.addAttribute("bookDetailsInfo",booksService.getBookInfo(bookId));
+        	model.addAttribute("deleteErrorMessage","貸出中のため削除できません");
+        	return "details";
+        }
         
-        booksService.deleteBook(bookId);
-        model.addAttribute("bookList", booksService.getBookList());
-        return "home";
+//        booksService.deleteBook(bookId);
+//        model.addAttribute("bookList", booksService.getBookList());
+//        return "home";
 
     }
 
