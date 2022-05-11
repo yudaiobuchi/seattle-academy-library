@@ -42,11 +42,8 @@
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
-                 <c:if test="${!empty rentErrorMessage}">
-                        <div class="error">${rentErrorMessage}</div>
-                    </c:if>
-                 <c:if test="${!empty deleteErrorMessage}">
-                        <div class="error">${deleteErrorMessage}</div>
+                 <c:if test="${!empty ErrorMessage}">
+                        <div class="error">${ErrorMessage}</div>
                     </c:if>
             </div>
             <div class="content_right">

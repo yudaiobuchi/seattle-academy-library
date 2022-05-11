@@ -55,13 +55,9 @@ public class DeleteBookController {
         } else {
         	//貸出中だから書籍を削除できないというメッセージ表示
         	model.addAttribute("bookDetailsInfo",booksService.getBookInfo(bookId));
-        	model.addAttribute("deleteErrorMessage","貸出中のため削除できません");
+        	model.addAttribute("ErrorMessage","貸出中のため削除できません");
         	return "details";
         }
-        
-//        booksService.deleteBook(bookId);
-//        model.addAttribute("bookList", booksService.getBookList());
-//        return "home";
 
     }
 
