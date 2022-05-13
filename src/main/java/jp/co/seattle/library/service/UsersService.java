@@ -44,10 +44,19 @@ public class UsersService {
      */
     public UserInfo selectUserInfo(String email, String password) {
         // TODO SQL生成
-        String sql = "";
+        String sql = "select email,password from users where email =" + email + "and" + password + " = '6158'";
+;
+        try {
+        	//実行したい処理内容
+            //sqlの実行をする
+        	UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
+            return selectedUserInfo;
+        } catch  (Exception e) {
+        	return null;
+        }
 
-        UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
-        return selectedUserInfo;
+        
+       
 
     }
 
