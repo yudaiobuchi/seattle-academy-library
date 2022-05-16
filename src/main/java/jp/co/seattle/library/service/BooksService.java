@@ -120,5 +120,27 @@ public class BooksService {
 		// データを格納した変数を結果として返す
 		return bookId;
 	}
+	
+	/**
+	 * 検索の条件に合う書籍リストを取得する
+	 *
+	 * @return 書籍リスト
+	 */
+	public List<BookInfo> searchBookList(String search) {
+
+		
+		List<BookInfo> searchedBookList = jdbcTemplate.query(
+				"select id, title, author, publisher, publish_date, thumbnail_url from books WHERE title LIKE '%" + search + "%' ORDER BY title asc",
+				new BookInfoRowMapper());
+
+		return searchedBookList;
+	}
+//	 public int searchBook(String search) {
+//		 String sql = "SELECT * FROM books WHERE title LIKE '" + search + "';";
+//		 BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
+//		 int bookId = jdbcTemplate.queryForObject(sql, Integer.class);
+//		 return bookId;
+//	 }
+	
 
 }
