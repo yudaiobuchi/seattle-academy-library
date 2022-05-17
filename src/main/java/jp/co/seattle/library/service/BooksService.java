@@ -50,7 +50,8 @@ public class BooksService {
 	public BookDetailsInfo getBookInfo(int bookId) {
 
 		// JSPに渡すデータを設定する
-		String sql = "select books.id, books.title, books.author, books.publisher, books.publish_date, books.thumbnail_url, books.thumbnail_name, books.description, books.isbn, rentalbooks.rent_id, case when rent_id != 0 then '貸出中' else '貸出可' end as status from books  left join rentalbooks on books.id = rentalbooks.rent_id WHERE books.id =" + bookId + ";";
+		String sql = "select books.id, books.title, books.author, books.publisher, books.publish_date, books.thumbnail_url, books.thumbnail_name, books.description, books.isbn, rentalbooks.rent_id, case when rent_id != 0 then '貸出中' else '貸出可' end as status from books  left join rentalbooks on books.id = rentalbooks.rent_id WHERE books.id ="
+				+ bookId + ";";
 
 		BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
 
@@ -120,7 +121,7 @@ public class BooksService {
 		// データを格納した変数を結果として返す
 		return bookId;
 	}
-	
+
 	/**
 	 * 検索の条件に合う書籍リストを取得する
 	 *
@@ -128,19 +129,9 @@ public class BooksService {
 	 */
 	public List<BookInfo> searchBookList(String search) {
 
-		
-		List<BookInfo> searchedBookList = jdbcTemplate.query(
-				"select id, title, author, publisher, publish_date, thumbnail_url from books WHERE title LIKE '%" + search + "%' ORDER BY title asc",
-				new BookInfoRowMapper());
-
+		List<BookInfo> searchedBookList = jdbcTemplate
+				.query("select id, title, author, publisher, publish_date, thumbnail_url from books WHERE title LIKE '%"
+						+ search + "%' ORDER BY title asc", new BookInfoRowMapper());
 		return searchedBookList;
 	}
-//	 public int searchBook(String search) {
-//		 String sql = "SELECT * FROM books WHERE title LIKE '" + search + "';";
-//		 BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
-//		 int bookId = jdbcTemplate.queryForObject(sql, Integer.class);
-//		 return bookId;
-//	 }
-	
-
 }

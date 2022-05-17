@@ -20,8 +20,6 @@ public class SearchBooksController {
 	 public String searchBooks(Locale locale,@RequestParam("search") String search, Model model) {
 		
 		model.addAttribute("bookList",booksService.searchBookList(search));
-		//booksService.searchBookList(search);
-		//model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 		return "home";
 	}
 	
