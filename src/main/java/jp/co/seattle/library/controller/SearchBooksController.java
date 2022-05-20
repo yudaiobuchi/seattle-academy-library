@@ -15,11 +15,17 @@ import jp.co.seattle.library.service.BooksService;
 public class SearchBooksController {
 	 @Autowired
 	    private BooksService booksService;
+	 
+	 
 
 	@RequestMapping(value = "/searchBook", method = RequestMethod.POST)
-	 public String searchBooks(Locale locale,@RequestParam("search") String search, Model model) {
+	 public String searchBooks(Locale locale,@RequestParam("search") String search, @RequestParam("radio") String radio,Model model) {
 		
-		model.addAttribute("bookList",booksService.searchBookList(search));
+		if (radio.equals("部分一致")) {
+			model.addAttribute("bookList",booksService.searchBookList(search));
+		} else {
+			model.addAttribute("bookList",booksService.AllSearchBookList(search));
+		}
 		return "home";
 	}
 	

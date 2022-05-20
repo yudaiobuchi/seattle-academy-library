@@ -123,7 +123,7 @@ public class BooksService {
 	}
 
 	/**
-	 * 検索の条件に合う書籍リストを取得する
+	 * 検索の条件に合う書籍リストを取得する(部分一致)
 	 *
 	 * @return 書籍リスト
 	 */
@@ -132,6 +132,18 @@ public class BooksService {
 		List<BookInfo> searchedBookList = jdbcTemplate
 				.query("select id, title, author, publisher, publish_date, thumbnail_url from books WHERE title LIKE '%"
 						+ search + "%' ORDER BY title asc", new BookInfoRowMapper());
+		return searchedBookList;
+	}
+	/**
+	 * 検索の条件に合う書籍リストを取得する(完全一致)
+	 *
+	 * @return 書籍リスト
+	 */
+	public List<BookInfo> AllSearchBookList(String search) {
+
+		List<BookInfo> searchedBookList = jdbcTemplate
+				.query("select id, title, author, publisher, publish_date, thumbnail_url from books WHERE title LIKE '"
+						+ search + "' ORDER BY title asc", new BookInfoRowMapper());
 		return searchedBookList;
 	}
 }

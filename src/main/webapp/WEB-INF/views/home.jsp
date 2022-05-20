@@ -31,7 +31,9 @@
             </div>
             <div class="f_item">
                 <form action="searchBook" method="post">
-                    <input class="search1" type="search" name="search" placeholder=""> <button class="search_box" type="submit" name="submit">検索</button>
+                    <input type="radio" name="radio" value="部分一致" checked>部分一致 <input type="radio" name="radio" value="完全一致">完全一致
+                    <input class="search1" type="search" name="search" placeholder="">
+                    <button class="search_box" type="submit" name="submit">検索</button>
                 </form>
             </div>
         </div>
