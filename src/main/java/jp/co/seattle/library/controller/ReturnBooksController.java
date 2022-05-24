@@ -1,5 +1,6 @@
 package jp.co.seattle.library.controller;
 
+import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import jp.co.seattle.library.service.RentalBooksService;
 public class ReturnBooksController {
 	
 	@Autowired
-	private RentalBooksService rentalbooksService;
+	private RentalBooksService rentalBooksService;
 	
 	@Autowired
 	private BooksService booksService;
@@ -29,17 +30,20 @@ public class ReturnBooksController {
 	
 	public String rentalBook(Locale locale,@RequestParam("bookId") int bookId, Model model) {
 		//本一冊（id）returnBookId
-		int returnBookId = rentalbooksService.getBookInfo(bookId);
+		int returnBookId = rentalBooksService.getBookInfo(bookId);
+		Date lendDate = rentalBooksService.getLendDateInfo(bookId);
 		
-		if (returnBookId == 0) {
+		if (returnBookId == 0 || lendDate == null) {
 			//貸し出されてないメッセージ
-			model.addAttribute("rentErrorMessage", "貸し出されていません");
+			model.addAttribute("ErrorMessage", "貸し出されていません");
+			
 		} else {
-			//rentalBooksから書籍の削除
-			rentalbooksService.deleteBook(bookId);
+			//カラムの値を更新　lend_dateをnullに
+			rentalBooksService.returnBook(bookId);
 		}
 		model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 		
 		return "details";
 	}
+	
 }
