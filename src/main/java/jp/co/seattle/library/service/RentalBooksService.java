@@ -116,10 +116,9 @@ public class RentalBooksService {
 		List<LendHistoryBookInfo> lendHistoryBookInfo = jdbcTemplate.query(
 				"SELECT rent_id, title, lend_date, return_date FROM books LEFT OUTER JOIN rentalbooks ON books.id = rentalbooks.rent_id;",
 				new LendHistoryBookInfoRowMapper());
-		
-		 return lendHistoryBookInfo;
-	}
 
+		return lendHistoryBookInfo;
+	}
 
 	/*
 	 * rentalbooksから書籍を削除するメソッド
@@ -131,21 +130,5 @@ public class RentalBooksService {
 		String sql = "DELETE FROM rentalbooks WHERE rent_id = " + bookId + ";";
 		jdbcTemplate.update(sql);
 	}
-
-	
-	
-	
-	/**
-	 * 借りるボタンを押された時の処理
-	 * 書籍をDBから削除する
-	 * 書籍をrentalbooksから削除
-	 * 
-	 * @param bookId 書籍ID
-	 */
-//	public void deleteBook(int bookId) {
-//		String sql = "DELETE FROM rentalbooks WHERE rent_id = " + bookId + ";";
-//		jdbcTemplate.update(sql);
-//	}
-	
 
 }
