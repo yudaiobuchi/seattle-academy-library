@@ -38,14 +38,17 @@
             </div>
         </div>
         <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkBook" class="btn_bulk_book">一括登録</a>
+       <a href="<%=request.getContextPath()%>/lendHistoryBook" class="btn_add_book" style="background-color: #FF9966;">貸出履歴一覧</a>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
                 <div class="error_msg">${resultMessage}</div>
             </c:if>
             <div>
                 <div class="booklist">
+                <%-- c:forEachでリストに対して処理を繰り返す--%>
                     <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
+                            <%-- 押された瞬間キーワードdetails --%>
                             <form method="post" class="book_thumnail" action="<%=request.getContextPath()%>/details">
                                 <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${bookInfo.thumbnail == 'null'}">
                                         <img class="book_noimg" src="resources/img/noImg.png">
